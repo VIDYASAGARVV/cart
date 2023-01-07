@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+    {{product.desc |truncatewords:155}}
+{% endblock %}}
+{% block title %}
+    {{product.name}}-shop cart
+{% endblock %}
+{% block content %}
+<div>
+    <div>
+        <p><a href="{% url 'ecommerceapp:allProdCat' %}">Home</a> |<a href="{%product.category.get_url%}"></a> {{product.name}}</p>
+    </div>
+    <div>
+        <br>
+        <div>
+            <img src="{{product.image.url}}" alt="{{product.name}}">
+        </div>
+    </div>
+    <div>
+        <div>
+            <h1>{{product.name}}</h1>
+            <p>₹{{product.price}}</p>
+            <p>{{product.desc}}</p>
+            {% if product.stock <= 0 %}
+            <p><b> {% Out of Stock %} </b></p>
+            {% else %}
+            <a href="">Add to Cart</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

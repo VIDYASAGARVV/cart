@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+
+  {% if category %}
+      {{ category.desc |truncatewords:155 }}
+  {% else %}
+      Welcome to the cart store where you can buy awesome
+  {% endif %}
+{% endblock %}
+
+{% block title %}
+    {% if category %}
+        {{category.name}}-shop cart
+    {% else %}
+      see our collections -shop cart
+    {% endif %}
+  {% endblock %}
+  {% block content %}
+      {% if category %}
+    <div>
+        <div>
+           <p><a href="{% url 'ecommerceapp:allProdCat' %}">Our product collections</a>{{category.name}}</p>
+        </div>
+    </div>
+   {% endif %}
+<div>
+       {% if category %}
+           <img src="{{category.img.url}}" alt="{{category.name}}">
+</div><br>
+<div>
+    <h1>{{category.name}}</h1>
+    <p>{{category.desc}}</p>
+</div>
+{% else %}
+<div>
+    <img src="{% static 'img/eCommerce.png' %}" alt="">
+</div>
+<br>
+<div>
+    <h1>Our Products Collections</h1>
+    <p>Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available.</p>
+</div>
+{% endif %}
+<div>
+    <div>
+        {% for product in products %}
+      <div>
+          <div>
+              <a href=""><img src="{{product.image.url}}" alt="{{product.name}}"></a>
+          <div>
+              <h4>{{product.name}}</h4>
+              <p>₹ {{product.price}}</p>
+
+          </div>
+          </div>
+      </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
